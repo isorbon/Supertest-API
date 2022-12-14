@@ -7,6 +7,7 @@ const TOKEN =
   "c29582a0dda6b38d0f5f2c5877bb657fc9199759067e61ddc64574d17620bb84";
 
 describe("Users", () => {
+  // API Tests for HTTP GET method
   it("GET /users", () => {
     /* request.get(`users?access-token=${TOKEN}`).end((err,res) => {
             console.log(err);
@@ -48,6 +49,7 @@ describe("Users", () => {
     });
   });
 
+  // API Tests for HTTP POST method
   it.only("POST /users", () => {
     const data = {
       email: `daramal-${Math.floor(Math.random() * 999)}@ukr.net`,
@@ -63,13 +65,16 @@ describe("Users", () => {
       .then((res) => {
         console.log(res.body);
 
-       // data.name = "Alex";
-       /*  expect(res.body.email).to.eq(data.email);
+        // data.name = "Alex";
+
+        /*  expect(res.body.email).to.eq(data.email);
         expect(res.body.status).to.eq(data.status);
         expect(res.body.gender).to.eq(data.gender); */
+
         // or we can do via chai assertion through all the data
         expect(res.body).to.deep.include(data);
-
       });
   });
+
+  // API Tests for HTTP PUT method
 });
