@@ -50,7 +50,7 @@ describe("Users", () => {
   });
 
   // API Tests for HTTP POST method
-  it.only("POST /users", () => {
+  it("POST /users", () => {
     const data = {
       email: `daramal-${Math.floor(Math.random() * 999)}@ukr.net`,
       name: `Abc_${Math.floor(Math.random() * 555)}`,
@@ -71,10 +71,27 @@ describe("Users", () => {
         expect(res.body.status).to.eq(data.status);
         expect(res.body.gender).to.eq(data.gender); */
 
-        // or we can do via chai assertion through all the data
+        // or we can do via Chai assertion through all the data
         expect(res.body).to.deep.include(data);
       });
   });
 
   // API Tests for HTTP PUT method
+  it.only("PUT /users/:id", () => {
+    const data = {
+      status: "active",
+      name: `Luffy-${Math.floor(Math.random() * 333)}`,
+      email: `daramal-${Math.floor(Math.random() * 999)}@ukr.net`,
+    };
+
+    return request
+      .put("users/5051")
+      .set("Authorization", `Bearer ${TOKEN}`)
+      .send(data)
+      .then((res) => {
+        // console.log(res.body);
+        // data.name = "Alex";
+        expect(res.body).to.deep.include(data);
+      });
+  });
 });
