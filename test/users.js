@@ -65,7 +65,7 @@ describe("Users", () => {
       .then((res) => {
         console.log(res.body);
 
-        // data.name = "Alex";
+        // data.name = 'Alex';
 
         /*  expect(res.body.email).to.eq(data.email);
         expect(res.body.status).to.eq(data.status);
@@ -77,7 +77,7 @@ describe("Users", () => {
   });
 
   // API Tests for HTTP PUT method
-  it.only("PUT /users/:id", () => {
+  it("PUT /users/:id", () => {
     const data = {
       status: "active",
       name: `Luffy-${Math.floor(Math.random() * 333)}`,
@@ -90,8 +90,18 @@ describe("Users", () => {
       .send(data)
       .then((res) => {
         // console.log(res.body);
-        // data.name = "Alex";
+        // data.name = 'Alex';
         expect(res.body).to.deep.include(data);
+      });
+  });
+
+  // API Tests for HTTP DELETE method
+  it.only("DELETE /users/:id", () => {
+    return request
+      .delete("users/4898")
+      .set("Authorization", `Bearer ${TOKEN}`)
+      .then((res) => {
+        expect(res.body).to.be.eq(null);
       });
   });
 });
