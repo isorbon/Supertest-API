@@ -6,7 +6,7 @@ import { expect } from "chai";
 const TOKEN =
   "c29582a0dda6b38d0f5f2c5877bb657fc9199759067e61ddc64574d17620bb84";
 
-describe("Users", () => {
+xdescribe("Users", () => {
   // API Tests for HTTP GET method
   it("GET /users", () => {
     /* request.get(`users?access-token=${TOKEN}`).end((err,res) => {
@@ -96,7 +96,7 @@ describe("Users", () => {
   });
 
   // API Tests for HTTP DELETE method
-  it.only("DELETE /users/:id", () => {
+  it("DELETE /users/:id", () => {
     return request
       .delete("users/4898")
       .set("Authorization", `Bearer ${TOKEN}`)
