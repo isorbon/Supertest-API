@@ -1,8 +1,10 @@
-import supertest from "supertest";
-const request = supertest("https://gorest.co.in/public/v2/");
+require('dotenv').config();
+import request from "../config/common";
+/* import supertest from "supertest";
+const request = supertest("https://gorest.co.in/public/v2/"); */
 
-const TOKEN =
-  "c29582a0dda6b38d0f5f2c5877bb657fc9199759067e61ddc64574d17620bb84";
+const faker = require('faker');
+const TOKEN = process.env.USER_TOKEN;
 
 export const createRandomUser = async () => {
   const data = {
@@ -17,5 +19,22 @@ export const createRandomUser = async () => {
     .set("Authorization", `Bearer ${TOKEN}`)
     .send(data);
 
+  return res.body.id;
+};
+
+export const createRandomUserWithFaker = async () => {
+  const data = {
+    email: faker.internet.email(),
+    name: faker.name.firstName(),
+    gender: "male",
+    status: "inactive",
+  };
+
+  const res = await request
+    .post("users")
+    .set("Authorization", `Bearer ${TOKEN}`)
+    .send(data);
+
+  console.log(res.body);
   return res.body.id;
 };

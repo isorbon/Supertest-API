@@ -1,10 +1,7 @@
-import supertest from "supertest";
-const request = supertest("https://gorest.co.in/public/v2/");
-
+require('dotenv').config();
+import request from "../config/common";
 import { expect } from "chai";
-
-const TOKEN =
-  "c29582a0dda6b38d0f5f2c5877bb657fc9199759067e61ddc64574d17620bb84";
+const TOKEN = process.env.USER_TOKEN;
 
 xdescribe("Users", () => {
   // API Tests for HTTP GET method

@@ -1,34 +1,36 @@
-import supertest from "supertest";
-const request = supertest("https://gorest.co.in/public/v2/");
-
+require('dotenv').config();
+import request from "../config/common";
+const faker = require('faker');
 import { expect, use } from "chai";
-import { createRandomUser } from "../helper/user_helper";
+import { createRandomUser, createRandomUserWithFaker } from "../helper/user_helper";
+const TOKEN = process.env.USER_TOKEN;
 
-const TOKEN =
-  "c29582a0dda6b38d0f5f2c5877bb657fc9199759067e61ddc64574d17620bb84";
-
-describe.only("User Posts", () => {
+describe("User Posts", () => {
   let postId, userId;
 
   // Hooks
   before(async () => {
-    userId = await createRandomUser();
+   // userId = await createRandomUser();
+    userId = await createRandomUserWithFaker();
   });
 
-  it("/posts", async () => {
+  it.only("/posts", async () => {
     const data = {
       user_id: userId,
-      title: "My Title",
-      body: "My Blog Text Body",
+    /*   title: "My Title",
+      body: "My Blog Text Body", */
+      title: faker.lorem.sentence(),
+      body: faker.lorem.paragraphs(),
     };
 
     const postRes = await request
       .post("posts")
       .set("Authorization", `Bearer ${TOKEN}`)
       .send(data);
-
+    
+    // console.log(data);
     // console.log(postRes.body);
-    expect(postRes.body).to.deep.include(data);
+   // expect(postRes.body).to.deep.include(data);
     postId = postRes.body.id;
   });
 
@@ -55,7 +57,7 @@ describe.only("User Posts", () => {
       expect(postRes.body.message).to.eq("Authentication failed");
     });
 
-    it.only("422 Validation Failed", async () => {
+    it("422 Validation Failed", async () => {
       const data = {
         user_id: userId,
         title: "My Title",
