@@ -3,7 +3,7 @@ import request from "../config/common";
 import { expect, use } from "chai";
 const TOKEN = process.env.USER_TOKEN;
 
-describe("Users", () => {
+describe.only("Users", () => {
   let userId;
 
   describe("POST", () => {
