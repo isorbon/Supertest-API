@@ -1,2 +1,9 @@
 # **Supertest, Mocha and Chai - API testing Framework**
-## *with JavaScript*
+### **with JavaScript**
+
+## **Run Tests**
+```
+npm test
+```
+
+&copy;
